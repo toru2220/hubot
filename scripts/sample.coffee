@@ -10,7 +10,7 @@ module.exports = (robot) ->
     # console.log(msg)
     @exec = require('child_process').exec
     filename = msg.match[1]
-    cmd = "find /mnt/titan/debian -type f -name *#{filename}*.mp4"
+    cmd = "find /mnt/titan/mp4 -type f -name *#{filename}*.mp4"
     msg.send "Running [#{cmd}]..."
 
     @exec cmd, (error, stdout, stderr) -> 
