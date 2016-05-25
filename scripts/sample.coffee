@@ -19,8 +19,12 @@ module.exports = (robot) ->
     
     root = Path.sep + "mnt" + Path.sep + "titan" + Path.sep + "mp4"
     msg.send "search in [#{root}]"
-    
-    r_readdir root, (err, files)->
+
+    options =
+      filterFile: (stats)->
+        stats.name.match(/^.*?chat.*?\.(mp4|flv)$/)
+        
+    r_readdir root, options, (err, files)->
       for name, index in files
         msg.send name
     
