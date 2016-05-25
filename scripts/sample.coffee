@@ -20,12 +20,11 @@ module.exports = (robot) ->
     root = Path.sep + "mnt" + Path.sep + "titan" + Path.sep + "mp4"
     msg.send "search in [#{root}]"
     
-    options = {
-	    filterFile: (stats) ->
-	        return stats.name.match(/.*?chat.*?mp4$/);
-	}
+	options =
+		filterFile: (stats)->
+			stats.name.substr(0,1) isnt '.' and stats.name.match(/\.(mp3|webm|ogg|aac|opus|mp4|wav|flv)$/)
 
-    recread(root, options, (err, files) ->
+    recread root, options, (err, files)->
       for name, index in files
         urlname = encodeURI(name.replace(/root/,domain))
         basename = Path.basename(name)
