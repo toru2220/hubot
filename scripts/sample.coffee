@@ -19,7 +19,8 @@ module.exports = (robot) ->
         msg.send stderr
       else
         if stdout.length > 0
-          msg.send "<html>#{stdout}</html>"
+          for name, index in split(/\r\n/,stdout)
+            msg.send "#{index} #{name}"
           msg.send "found #{stdout.length} files."
         else
           msg.send "file does not found"
