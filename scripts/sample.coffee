@@ -19,7 +19,7 @@ module.exports = (robot) ->
         msg.send stderr
       else
         if stdout.length > 0
-          files = stdout.split(/\r\n/)
+          files = stdout.split(/\n/)
           for name, index in files
             msg.send "#{index} #{name}"
           msg.send "found #{files.length} files."
