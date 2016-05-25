@@ -17,7 +17,8 @@ module.exports = (robot) ->
        msg.send "please set ENV [HUBOT_DOMAIN_MP4]"
        return
     
-    root = Path.sep + "mnt" + Path.sep + "titan" + Path.sep + "mp4"
+    root = Path.sep + "mnt" + Path.sep + "titan" + Path.sep + "mp4" 
+    root_quote = root.replace ///#{Path.sep}///,"\\#{Path.sep}"
     msg.send "search in [#{root}]...."
 
     filepattern = ///^.*?#{msg.match[1]}.*?\.(mp4|flv)$///
@@ -27,6 +28,8 @@ module.exports = (robot) ->
         
     r_readdir root, options, (err, files)->
       for name, index in files
-        msg.send name
+        urlname = encodeURI(name.replace(///#{root_quote}///,domain))
+        basename = Path.basename(name)
+        msg.send "<h2>#{basename}<h2><br><video src=\"#{urlname}\"></video>"
     
     
