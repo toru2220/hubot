@@ -5,7 +5,7 @@
 # Commands:
 #   hubot cmd <command> - runs a command on hubot host
 
-recread = require 'recursive-readdir-filter'
+r_readdir = require('recursive-readdir-filter')
 process = require 'process'
 Path = require 'path'
 
@@ -20,6 +20,7 @@ module.exports = (robot) ->
     root = Path.sep + "mnt" + Path.sep + "titan" + Path.sep + "mp4"
     msg.send "search in [#{root}]"
     
-	options =
-	  filterFile: (stats)->
-	    stats.name.match(/\.(mp4|flv)$/)
+    r_readdir root, (err, files)-> 
+      msg.send files.length
+    
+    
