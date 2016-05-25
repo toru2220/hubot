@@ -25,8 +25,10 @@ module.exports = (robot) ->
 	    stats.name.match(/\.(mp4|flv)$/)
 
     recread root, options, (err, files)->
-      for name, index in files
-        msg.send name
+		for f in files
+			do (f)->
+				msg.send f
+
 
 
  
