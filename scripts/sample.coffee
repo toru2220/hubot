@@ -22,7 +22,7 @@ module.exports = (robot) ->
     
 	options =
 		filterFile: (stats)->
-			stats.name.substr(0,1) isnt '.' and stats.name.match(/\.(mp3|webm|ogg|aac|opus|mp4|wav|flv)$/)
+			stats.name.match(/\.(mp3|webm|ogg|aac|opus|mp4|wav|flv)$/)
 
     recread root, options, (err, files)->
       for name, index in files
@@ -31,7 +31,6 @@ module.exports = (robot) ->
         msg.send "<h2>#{basename}<h2><br><video src=\"#{urlname}\"></video>"
         if index > 10
           break
-    )
 
 
  
