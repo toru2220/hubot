@@ -24,11 +24,6 @@ module.exports = (robot) ->
 	  filterFile: (stats)->
 	    stats.name.match(/\.(mp4|flv)$/)
 
-    recread root, options, (err, files)->
-      for name, index in files
-        urlname = encodeURI(name.replace(/root/,domain))
-        basename = Path.basename(name)
-        msg.send "<h2>#{basename}<h2><br><video src=\"#{urlname}\"></video>"
 
 
  
