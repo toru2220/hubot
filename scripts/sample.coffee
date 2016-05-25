@@ -26,6 +26,7 @@ module.exports = (robot) ->
         urlname = encodeURI(name.replace(/root/,domain))
         basename = Path.basename(name)
         msg.send "<h2>#{basename}<h2><br><video src=\"#{urlname}\"></video>"
+        return if index > 50
     )
 
 
