@@ -27,6 +27,9 @@ module.exports = (robot) ->
         stats.name.match(filepattern)
         
     r_readdir root, options, (err, files)->
+      if files.length < 1
+        msg.send "file not found"
+        return
       for name, index in files
         urlname = encodeURI(name.replace(///#{root_quote}///,domain))
         basename = Path.basename(name)
