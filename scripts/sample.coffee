@@ -23,6 +23,3 @@ module.exports = (robot) ->
 	options =
 	  filterFile: (stats)->
 	    stats.name.match(/\.(mp4|flv)$/)
-
-    recread root, (err, files)->
-       msg.send "search"
