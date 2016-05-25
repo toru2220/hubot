@@ -18,6 +18,9 @@ module.exports = (robot) ->
         msg.send error
         msg.send stderr
       else
-        msg.send stdout
+        if stdout.length > 0
+          msg.send stdout
+        else
+          msg.send "file does not found"
 
         
