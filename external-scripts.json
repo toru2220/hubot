@@ -8,5 +8,6 @@
   "hubot-maps",
   "hubot-redis-brain",
   "hubot-rules",
-  "hubot-shipit"
+  "hubot-shipit",
+  "toru2220-hubot-scripts"
 ]
