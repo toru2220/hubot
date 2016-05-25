@@ -20,7 +20,8 @@ module.exports = (robot) ->
     root = Path.sep + "mnt" + Path.sep + "titan" + Path.sep + "mp4"
     msg.send "search in [#{root}]"
     
-    r_readdir root, (err, files)-> 
-      msg.send files.length
+    r_readdir root, (err, files)->
+      for name, index in files
+        msg.send name
     
     
