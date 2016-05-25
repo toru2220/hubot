@@ -17,13 +17,13 @@ module.exports = (robot) ->
        msg.send "please set ENV [HUBOT_DOMAIN_MP4]"
        return
     
-    filter = msg.match[1]
     root = Path.sep + "mnt" + Path.sep + "titan" + Path.sep + "mp4"
     msg.send "search in [#{root}]...."
 
     options =
       filterFile: (stats)->
-        stats.name.match(/^.*?#{filter}.*?\.(mp4|flv)$/)
+        filter = "^.*?#{msg.match[1]}.*?\.(mp4|flv)$"
+        stats.name.match(/filter/)
         
     r_readdir root, options, (err, files)->
       for name, index in files
