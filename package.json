@@ -1,9 +1,9 @@
 {
-  "name": "chocobot",
+  "name": "hubot",
   "version": "0.0.0",
   "private": true,
-  "author": "User <user@example.com>",
-  "description": "A simple helpful robot for your Company",
+  "author": "user <user@example.com>",
+  "description": "hubot scripts",
   "dependencies": {
     "hubot": "^2.19.0",
     "hubot-diagnostics": "0.0.1",
@@ -17,7 +17,8 @@
     "hubot-redis-brain": "0.0.3",
     "hubot-rules": "^0.1.1",
     "hubot-scripts": "^2.17.2",
-    "hubot-shipit": "^0.2.0"
+    "hubot-shipit": "^0.2.0",
+    "hubot-scripts": "git://github.com/toru2220/hubot-scripts.git"
   },
   "engines": {
     "node": "0.10.x"
