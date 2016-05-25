@@ -25,5 +25,4 @@ module.exports = (robot) ->
 	    stats.name.match(/\.(mp4|flv)$/)
 
     recread(root, options, (err, files)->
-      for f in files
     )
