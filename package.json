@@ -18,7 +18,7 @@
     "hubot-rules": "^0.1.1",
     "hubot-scripts": "^2.17.2",
     "hubot-shipit": "^0.2.0",
-    "recursive-readdir": "^2.0.0",
+    "recursive-readdir-filter": "^0.0.3",
     "toru2220-hubot-scripts": "git://github.com/toru2220/toru2220-hubot-scripts"
   },
   "engines": {
