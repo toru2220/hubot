@@ -22,15 +22,13 @@ module.exports = (robot) ->
     
 	options =
 	  filterFile: (stats)->
-	    stats.name.match(/\.(mp3|webm|ogg|aac|opus|mp4|wav|flv)$/)
+	    stats.name.match(/\.(mp4|flv)$/)
 
     recread root, options, (err, files)->
       for name, index in files
         urlname = encodeURI(name.replace(/root/,domain))
         basename = Path.basename(name)
         msg.send "<h2>#{basename}<h2><br><video src=\"#{urlname}\"></video>"
-        if index > 10
-          break
 
 
  
