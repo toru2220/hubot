@@ -21,7 +21,7 @@ module.exports = (robot) ->
     msg.send "search in [#{root}]...."
 
     filepattern = msg.match[1]
-    regexp = "^.*?#{filepattern}\.(mp4|flv)$"
+    regexp = "^.*?#{filepattern}.*?\.(mp4|flv)$"
     options =
       filterFile: (stats)->
         /regexp/i.test(stats.name)
