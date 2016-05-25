@@ -30,6 +30,6 @@ module.exports = (robot) ->
       for name, index in files
         urlname = encodeURI(name.replace(///#{root_quote}///,domain))
         basename = Path.basename(name)
-        msg.send "<h2>#{basename}<h2><br><video src=\"#{urlname}\"></video>"
+        msg.send "[#{basename}](#{urlname})"
     
     
