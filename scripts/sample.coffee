@@ -10,7 +10,7 @@ module.exports = (robot) ->
     # console.log(msg)
     @exec = require('child_process').exec
     filename = msg.match[1]
-    cmd = "find /mnt/titan/debian -type f -mtime -40 -name *#{filename}*"
+    cmd = "find /mnt/titan/debian -type f -name *#{filename}*.mp4"
     msg.send "Running [#{cmd}]..."
 
     @exec cmd, (error, stdout, stderr) -> 
@@ -19,7 +19,8 @@ module.exports = (robot) ->
         msg.send stderr
       else
         if stdout.length > 0
-          msg.send stdout
+          msg.send "<html>#{stdout}</html>"
+          msg.send "found #{stdout.length} files."
         else
           msg.send "file does not found"
 
