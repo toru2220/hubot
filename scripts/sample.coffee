@@ -7,7 +7,7 @@
 
 recread = require 'recursive-readdir'
 process = require 'process'
-Path = require 'Path'
+Path = require 'path'
 
 module.exports = (robot) ->
   robot.hear /search mp4 (.*)$/i, (msg) ->
