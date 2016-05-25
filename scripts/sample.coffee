@@ -20,10 +20,11 @@ module.exports = (robot) ->
     root = Path.sep + "mnt" + Path.sep + "titan" + Path.sep + "mp4"
     msg.send "search in [#{root}]...."
 
-    filter = msg.match[1]
+    filepattern = msg.match[1]
+    regexp = "^.*?#{filepattern}\.(mp4|flv)$"
     options =
       filterFile: (stats)->
-        stats.name.match(/\.(mp4|flv)$/) and stats.name.match(/filter/)
+        /regexp/i.test(stats.name)
         
     r_readdir root, options, (err, files)->
       for name, index in files
