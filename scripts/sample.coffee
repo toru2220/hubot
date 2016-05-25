@@ -21,15 +21,13 @@ module.exports = (robot) ->
     msg.send "search in [#{root}]"
     
     outmsg = ""
-    recread(root, ['*#{msg.match[1]}*.mp4'], (err, files) ->
+    recread(root, ['*chat*.mp4'], (err, files) ->
       for name, index in files
         urlname = encodeURI(name.replace(/root/,domain))
         basename = Path.basename(name)
-        outmsg = outmsg +  "<h2>#{basename}<h2><br><video src=\"#{urlname}\"></video>"
+        msg.send "<h2>#{basename}<h2><br><video src=\"#{urlname}\"></video>"
     )
-    
-    msg.send outmsg
- 
+
 
  
         
