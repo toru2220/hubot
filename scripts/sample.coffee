@@ -24,7 +24,7 @@ module.exports = (robot) ->
     regexp = "^.*?#{filepattern}.*?\.(mp4|flv)$"
     options =
       filterFile: (stats)->
-        /regexp/i.test(stats.name)
+        /^.*?chat.*?\.(mp4|flv)$/i.test(stats.name)
         
     r_readdir root, options, (err, files)->
       for name, index in files
