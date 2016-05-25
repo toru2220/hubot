@@ -5,32 +5,18 @@
 # Commands:
 #   hubot cmd <command> - runs a command on hubot host
 
-Path = require 'path'
+recread = require 'recursive-readdir'
+process = require 'process'
+path = require 'path'
 
 module.exports = (robot) ->
   robot.hear /search mp4 (.*)$/i, (msg) ->
-    # console.log(msg)
-    @exec = require('child_process').exec
-    filename = msg.match[1]
-    cmd = "find /mnt/titan/mp4 -type f -name *#{filename}*.mp4"
-    msg.send "Running [#{cmd}]..."
+    root = path.sep + "mnt" + path.sep + "titan" + path.sep + "test"
+    recread(root, [], (err, files) ->
+      for name, index in files
+        msg.send name
+    )
+    
 
-    @exec cmd, (error, stdout, stderr) -> 
-      if error
-        msg.send error
-        msg.send stderr
-      else
-        if stdout.length > 0
-          files = stdout.split(/\n/)
-          for name, index in files
-            if name.length > 0
-              domain = process.env.HUBOT_DOMAIN_MP4  or ''
-              if domain.length > 0 
-                urlname = encodeURI(name.replace(/\/mnt\/titan\/mp4/,domain))
-                basename = Path.basename(name)
-                msg.send "<h2>#{basename}<h2><br><video src=\"#{urlname}\"></video>"
-          msg.send "found #{files.length - 1} files."
-        else
-          msg.send "file not found"
-
+ 
         
