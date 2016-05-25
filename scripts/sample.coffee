@@ -22,6 +22,9 @@ module.exports = (robot) ->
           files = stdout.split(/\n/)
           for name, index in files
             if name.length > 0
+              domain = process.env.HUBOT_DOMAIN_MP4  or ''
+              if domain.length > 0 
+                name.replace(/\/mnt\/titan\/mp4/,domain)
               msg.send "#{index + 1} #{name}"
           msg.send "found #{files.length - 1} files."
         else
