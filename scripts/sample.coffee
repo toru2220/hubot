@@ -17,15 +17,18 @@ module.exports = (robot) ->
        msg.send "please set ENV [HUBOT_DOMAIN_MP4]"
        return
     
-    pattern = "*" + msg.match[1] + "*.mp4"
     root = Path.sep + "mnt" + Path.sep + "titan" + Path.sep + "mp4"
     msg.send "search in [#{root}]"
-    recread(root, [pattern], (err, files) ->
+    
+    outmsg = ""
+    recread(root, ['*#{msg.match[1]}*.mp4'], (err, files) ->
       for name, index in files
         urlname = encodeURI(name.replace(/root/,domain))
         basename = Path.basename(name)
-        msg.send "<h2>#{basename}<h2><br><video src=\"#{urlname}\"></video>"
+        outmsg = outmsg +  "<h2>#{basename}<h2><br><video src=\"#{urlname}\"></video>"
     )
+    
+    msg.send outmsg
  
 
  
