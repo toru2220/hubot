@@ -17,7 +17,7 @@
     "hubot-redis-brain": "0.0.3",
     "hubot-rules": "^0.1.1",
     "hubot-scripts": "^2.17.2",
-    "hubot-shipit": "^0.2.0",
+    "hubot-shipit": "^0.2.0"
     "toru2220-hubot-scripts": "git://github.com/toru2220/toru2220-hubot-scripts"
   },
   "engines": {
