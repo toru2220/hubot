@@ -23,8 +23,8 @@ module.exports = (robot) ->
           for name, index in files
             if name.length > 0
               msg.send "#{index + 1} #{name}"
-          msg.send "found #{files.length} files."
+          msg.send "found #{files.length - 1} files."
         else
-          msg.send "file does not found"
+          msg.send "file not found"
 
         
