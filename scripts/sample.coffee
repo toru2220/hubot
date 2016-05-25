@@ -21,7 +21,7 @@ module.exports = (robot) ->
     msg.send "search in [#{root}]"
     
     options = {
-	    filterFile: function (stats) {
+	    filterFile: (stats) ->
 	        return stats.name.match(/.*?chat.*?mp4$/);
 	    }
 	};
