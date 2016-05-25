@@ -5,6 +5,8 @@
 # Commands:
 #   hubot cmd <command> - runs a command on hubot host
 
+Path = require 'path'
+
 module.exports = (robot) ->
   robot.hear /search mp4 (.*)$/i, (msg) ->
     # console.log(msg)
@@ -24,8 +26,9 @@ module.exports = (robot) ->
             if name.length > 0
               domain = process.env.HUBOT_DOMAIN_MP4  or ''
               if domain.length > 0 
-                name = encodeURI(name.replace(/\/mnt\/titan\/mp4/,domain))
-              msg.send "#{index + 1} #{name}"
+                urlname = encodeURI(name.replace(/\/mnt\/titan\/mp4/,domain))
+                basename = Path.basename(name)
+                msg.send "<h2>#{basename}<h2><br><video src=\"#{urlname}\"></video>"
           msg.send "found #{files.length - 1} files."
         else
           msg.send "file not found"
