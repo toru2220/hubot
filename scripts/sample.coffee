@@ -21,8 +21,8 @@ module.exports = (robot) ->
     msg.send "search in [#{root}]"
     
 	options =
-		filterFile: (stats)->
-			stats.name.match(/\.(mp3|webm|ogg|aac|opus|mp4|wav|flv)$/)
+	  filterFile: (stats)->
+	    stats.name.match(/\.(mp3|webm|ogg|aac|opus|mp4|wav|flv)$/)
 
     recread root, options, (err, files)->
       for name, index in files
