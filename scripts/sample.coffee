@@ -23,8 +23,7 @@ module.exports = (robot) ->
     options = {
 	    filterFile: (stats) ->
 	        return stats.name.match(/.*?chat.*?mp4$/);
-	    }
-	};
+	}
 
     recread(root, options, (err, files) ->
       for name, index in files
