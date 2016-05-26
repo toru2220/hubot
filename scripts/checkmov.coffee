@@ -30,7 +30,7 @@ search_movie = (msg,env_domain,env_localdir,filepattern,readdir_options) ->
       for name, index in files
         urlname = encodeURI(name.replace(///#{root_quote}///,domain))
         basename = Path.basename(name)
-        msg.send "[#{basename}](#{urlname})"
+        msg.send "[![#{basename}](http://i.ytimg.com/vi/xTU0K5q7Zbo/default.jpg)](#{urlname})"
 
 module.exports = (robot) ->
   robot.hear /search mp4 (.*)$/i, (msg) ->
