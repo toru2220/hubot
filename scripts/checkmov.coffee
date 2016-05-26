@@ -36,12 +36,12 @@ module.exports = (robot) ->
   robot.hear /search mp4 (.*)$/i, (msg) ->
 
     domain = process.env.HUBOT_DOMAIN_MP4  or ''
-    if is_defined_env(domain)
+    if not is_defined_env(domain)
        msg.send "please set ENV [HUBOT_DOMAIN_MP4]"
        return
 
     localdir = process.env.HUBOT_DOMAIN_LOCALDIR_MP4  or ''
-    if is_defined_env(localdir)
+    if not is_defined_env(localdir)
        msg.send "please set ENV [HUBOT_DOMAIN_LOCALDIR_MP4]"
        return
 
