@@ -28,7 +28,11 @@ search_movie = (msg,env_domain,env_localdir,filepattern,readdir_options) ->
         msg.send "file not found"
         return
       for name, index in files
+      
         urlname = encodeURI(name.replace(///#{root_quote}///,domain))
+        urlname = encodeURI(urlname.replace(/\(/g,'\%28'))
+        urlname = encodeURI(urlname.replace(/\)/g,'\%29'))
+        
         basename = Path.basename(name)
         msg.send ":clapper:[movie](#{urlname})"
 
