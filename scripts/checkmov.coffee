@@ -35,6 +35,8 @@ search_movie = (msg,env_domain,env_localdir,filepattern,readdir_options) ->
         
         basename = Path.basename(name)
         msg.send ":clapper:[movie](#{urlname})"
+        
+      msg.send "found #{files.length} files."
 
 module.exports = (robot) ->
   robot.hear /search in (.*) from (.*) to (.*)$/i, (msg) ->
