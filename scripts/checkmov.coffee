@@ -56,7 +56,7 @@ module.exports = (robot) ->
         
     search_movie(msg,domain,localdir,filepattern,options)
  
-   robot.response /checkmov help/i, (msg) ->
-     msg.send "usage: search in (keyword) from (server_local_path) to (domain_context_path)"
+  robot.response /checkmov help/i, (msg) ->
+    msg.send "usage: search in (keyword) from (server_local_path) to (domain_context_path)"
  
     
