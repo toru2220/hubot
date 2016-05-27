@@ -43,9 +43,9 @@ module.exports = (robot) ->
 	localdir = msg.match[2]
 	contextpath = msg.match[3]
 
-    domain = process.env.HUBOT_DOMAIN + "/" + contextpath  or ''
+    domain = process.env.HUBOT_CHECKMOV_DOMAIN + "/" + contextpath  or ''
     if not is_defined_env(domain)
-       msg.send "please set ENV [HUBOT_DOMAIN]"
+       msg.send "please set ENV [HUBOT_CHECKMOV_DOMAIN]"
        return
 
     filepattern = ///^.*?#{keyword}.*?\.(mp4|flv)$///
