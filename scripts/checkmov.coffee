@@ -30,7 +30,7 @@ search_movie = (msg,env_domain,env_localdir,filepattern,readdir_options) ->
       for name, index in files
         urlname = encodeURI(name.replace(///#{root_quote}///,domain))
         basename = Path.basename(name)
-        msg.send "[:clapper:](#{urlname})"
+        msg.send ":clapper:[movie](#{urlname})"
 
 module.exports = (robot) ->
   robot.hear /search mp4 (.*)$/i, (msg) ->
