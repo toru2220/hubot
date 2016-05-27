@@ -27,6 +27,9 @@ search_movie = (msg,env_domain,env_localdir,filepattern,readdir_options) ->
       if files.length < 1
         msg.send "file not found"
         return
+      
+      msg.send "found #{files.length} files."
+      
       for name, index in files
       
         urlname = encodeURI(name.replace(///#{root_quote}///,domain))
@@ -35,8 +38,7 @@ search_movie = (msg,env_domain,env_localdir,filepattern,readdir_options) ->
         
         basename = Path.basename(name)
         msg.send ":clapper:[movie](#{urlname})"
-        
-      msg.send "found #{files.length} files."
+
 
 module.exports = (robot) ->
   robot.hear /search in (.*) from (.*) to (.*)$/i, (msg) ->
