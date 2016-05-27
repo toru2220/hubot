@@ -39,9 +39,9 @@ search_movie = (msg,env_domain,env_localdir,filepattern,readdir_options) ->
 module.exports = (robot) ->
   robot.hear /search in (.*) from (.*) to (.*)$/i, (msg) ->
 
-	keyword = msg.match[1]
-	localdir = msg.match[2]
-	contextpath = msg.match[3]
+    keyword = msg.match[1]
+    localdir = msg.match[2]
+    contextpath = msg.match[3]
 
     domain = process.env.HUBOT_CHECKMOV_DOMAIN + "/" + contextpath  or ''
     if not is_defined_env(domain)
