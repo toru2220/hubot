@@ -37,44 +37,26 @@ search_movie = (msg,env_domain,env_localdir,filepattern,readdir_options) ->
         msg.send ":clapper:[movie](#{urlname})"
 
 module.exports = (robot) ->
-  robot.hear /search mp4 (.*)$/i, (msg) ->
+  robot.hear /search in (.*) from (.*) to (.*)$/i, (msg) ->
 
-    domain = process.env.HUBOT_DOMAIN_MP4  or ''
+	keyword = msg.match[1]
+	localdir = msg.match[2]
+	contextpath = msg.match[3]
+
+    domain = process.env.HUBOT_DOMAIN + "/" + contextpath  or ''
     if not is_defined_env(domain)
-       msg.send "please set ENV [HUBOT_DOMAIN_MP4]"
+       msg.send "please set ENV [HUBOT_DOMAIN]"
        return
 
-    localdir = process.env.HUBOT_DOMAIN_LOCALDIR_MP4  or ''
-    if not is_defined_env(localdir)
-       msg.send "please set ENV [HUBOT_DOMAIN_LOCALDIR_MP4]"
-       return
-
-    filepattern = ///^.*?#{msg.match[1]}.*?\.(mp4|flv)$///
+    filepattern = ///^.*?#{keyword}.*?\.(mp4|flv)$///
     
     options =
       filterFile: (stats)->
         stats.name.match(filepattern)
         
     search_movie(msg,domain,localdir,filepattern,options)
-
-  robot.hear /search flv (.*)$/i, (msg) ->
-
-    domain = process.env.HUBOT_DOMAIN_FLV  or ''
-    if not is_defined_env(domain)
-       msg.send "please set ENV [HUBOT_DOMAIN_FLV]"
-       return
-
-    localdir = process.env.HUBOT_DOMAIN_LOCALDIR_FLV  or ''
-    if not is_defined_env(localdir)
-       msg.send "please set ENV [HUBOT_DOMAIN_LOCALDIR_FLV]"
-       return
-
-    filepattern = ///^.*?#{msg.match[1]}.*?\.(mp4|flv)$///
-    
-    options =
-      filterFile: (stats)->
-        stats.name.match(filepattern)
-        
-    search_movie(msg,domain,localdir,filepattern,options)
-    
+ 
+   robot.response /checkmov help/i, (msg) ->
+     msg.send "usage: search in (keyword) from (server_local_path) to (domain_context_path)"
+ 
     
