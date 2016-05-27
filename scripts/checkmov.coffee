@@ -30,7 +30,7 @@ search_movie = (msg,env_domain,env_localdir,filepattern,readdir_options) ->
       for name, index in files
         urlname = encodeURI(name.replace(///#{root_quote}///,domain))
         basename = Path.basename(name)
-        msg.send "[![#{basename}](http://i.ytimg.com/vi/xTU0K5q7Zbo/default.jpg)](#{urlname})"
+        msg.send "[:clapper:](#{urlname})"
 
 module.exports = (robot) ->
   robot.hear /search mp4 (.*)$/i, (msg) ->
@@ -53,5 +53,24 @@ module.exports = (robot) ->
         
     search_movie(msg,domain,localdir,filepattern,options)
 
+  robot.hear /search flv (.*)$/i, (msg) ->
+
+    domain = process.env.HUBOT_DOMAIN_FLV  or ''
+    if not is_defined_env(domain)
+       msg.send "please set ENV [HUBOT_DOMAIN_FLV]"
+       return
+
+    localdir = process.env.HUBOT_DOMAIN_LOCALDIR_FLV  or ''
+    if not is_defined_env(localdir)
+       msg.send "please set ENV [HUBOT_DOMAIN_LOCALDIR_FLV]"
+       return
+
+    filepattern = ///^.*?#{msg.match[1]}.*?\.(mp4|flv)$///
+    
+    options =
+      filterFile: (stats)->
+        stats.name.match(filepattern)
+        
+    search_movie(msg,domain,localdir,filepattern,options)
     
     
