@@ -53,6 +53,7 @@ module.exports = (robot) ->
        return
 
     filepattern = ///^.*?#{keyword}.*?\.(mp4|flv)$///
+    filepattern = ///^.*?\.(mp4|flv)$/// if keyword is "all"
     
     options =
       filterFile: (stats)->
@@ -81,6 +82,7 @@ module.exports = (robot) ->
        return
 
     filepattern = ///^.*?#{keyword}.*?\.(mp4|flv)$///
+    filepattern = ///^.*?\.(mp4|flv)$/// if keyword is "all"
     
     options =
       filterFile: (stats)->
@@ -88,7 +90,7 @@ module.exports = (robot) ->
         is_pattern_matching = stats.name.match(filepattern)
         
         days_passed = Math.round((today.getTime() - stats.mtime.getTime()) / DAY)
-        is_recent_file = true if days_passed <= 1
+        is_recent_file = true if days_passed <= 2
         
         return is_pattern_matching && is_recent_file
         
