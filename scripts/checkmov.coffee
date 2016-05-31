@@ -62,3 +62,36 @@ module.exports = (robot) ->
 
   robot.respond /checkmov help/i, (msg) ->
     msg.send "usage: search in (keyword) from (server_local_path) to (domain_context_path)"
+
+module.exports = (robot) ->
+  robot.hear /recent file in (.*) from (.*) to (.*)$/i, (msg) ->
+
+    DAY = 1000 * 60 * 60  * 24
+    today = new Date
+    dd = today.getDate()
+
+    keyword = msg.match[1]
+    localdir = msg.match[2]
+    contextpath = msg.match[3]
+
+    domain = process.env.HUBOT_CHECKMOV_DOMAIN + "/" + contextpath  or ''
+    if not is_defined_env(domain)
+       msg.send "please set ENV [HUBOT_CHECKMOV_DOMAIN]"
+       return
+
+    filepattern = ///^.*?#{keyword}.*?\.(mp4|flv)$///
+    
+    options =
+      filterFile: (stats)->
+        is_recent_file = false
+        is_pattern_matching = stats.name.match(filepattern)
+        
+        days_passed = Math.round((dd.getTime() - stats.mtime.getTime()) / DAY)
+        is_recent_file = true if days_passed <= 1
+        
+        return is_pattern_matching && is_recent_file
+        
+    search_movie(msg,domain,localdir,filepattern,options)
+
+  robot.respond /checkmov help/i, (msg) ->
+    msg.send "usage: search in (keyword) from (server_local_path) to (domain_context_path)"
