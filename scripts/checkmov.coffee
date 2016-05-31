@@ -61,9 +61,11 @@ module.exports = (robot) ->
     search_movie(msg,domain,localdir,filepattern,options)
 
   robot.respond /checkmov help/i, (msg) ->
+    msg.send "Search All Files"
     msg.send "usage: search in (keyword) from (server_local_path) to (domain_context_path)"
+    msg.send "Search Recent Files"
+    msg.send "usage: recent file in (keyword) from (server_local_path) to (domain_context_path)"
 
-module.exports = (robot) ->
   robot.hear /recent file in (.*) from (.*) to (.*)$/i, (msg) ->
 
     DAY = 1000 * 60 * 60  * 24
