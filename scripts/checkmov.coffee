@@ -70,7 +70,6 @@ module.exports = (robot) ->
 
     DAY = 1000 * 60 * 60  * 24
     today = new Date
-    dd = today.getDate()
 
     keyword = msg.match[1]
     localdir = msg.match[2]
@@ -88,12 +87,9 @@ module.exports = (robot) ->
         is_recent_file = false
         is_pattern_matching = stats.name.match(filepattern)
         
-        days_passed = Math.round((dd.getTime() - stats.mtime.getTime()) / DAY)
+        days_passed = Math.round((today.getTime() - stats.mtime.getTime()) / DAY)
         is_recent_file = true if days_passed <= 1
         
         return is_pattern_matching && is_recent_file
         
     search_movie(msg,domain,localdir,filepattern,options)
-
-  robot.respond /checkmov help/i, (msg) ->
-    msg.send "usage: search in (keyword) from (server_local_path) to (domain_context_path)"
