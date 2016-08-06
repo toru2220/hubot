@@ -6,6 +6,7 @@
   "description": "hubot scripts",
   "dependencies": {
     "hubot": "^2.19.0",
+    "hubot-slack": "^4.0.2",
     "hubot-diagnostics": "0.0.1",
     "hubot-gitter2": "^0.1.3",
     "hubot-google-images": "^0.2.6",
