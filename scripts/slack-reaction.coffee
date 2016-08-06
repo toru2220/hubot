@@ -9,7 +9,7 @@ debug = require('debug')('hubot:slack-reaction')
 _     = require 'lodash'
 
 config =
-  room: 'reactions'
+  room: 'general'
 
 module.exports = (robot) ->
 
