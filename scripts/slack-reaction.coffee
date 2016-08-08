@@ -32,6 +32,7 @@ module.exports = (robot) ->
   robot.adapter.client?.on? 'raw_message', (msg) ->
     if msg.type isnt 'reaction_added' and
        msg.type isnt 'reaction_removed'
+      robot.send {room: config.room}, msg.type
       return
     debug msg
     return if msg.item.type isnt 'message'
