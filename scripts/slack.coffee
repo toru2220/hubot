@@ -53,7 +53,7 @@ module.exports = (robot) ->
         retrun true
   
   #対象のタイトルを取得し保存用のフルパス名を返す
-  generate_filename = (savedir,extension) ->
+  generate_filename = (url,savedir,extension) ->
     child_process.exec "youtube-dl --get-title #{url}", (error, stdout, stderr) ->
       if !error
         msg.reply "[generate filename] title fetch failed. message = #{error}"
@@ -76,11 +76,11 @@ module.exports = (robot) ->
       return
 
     #generate title and set option
-    savefilename_mp4 = generate_filename(savemov,"mp4")
+    savefilename_mp4 = generate_filename(url,savemov,"mp4")
     savefilename_mp3 = ""
     option = "--write-thumbnail"
     if savetype == "conv"
-      savefilename_mp3 = generate_filename(savemp3,"mp3")
+      savefilename_mp3 = generate_filename(url,savemp3,"mp3")
       
     #simulation mode
     if mode == "test"
