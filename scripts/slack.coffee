@@ -41,7 +41,7 @@ module.exports = (robot) ->
         msg.reply "youtube-dl is not installed. finished."
         return false
       else
-        retrun true
+        return true
   
   #ffmpegインストールチェック
   isinstalled_ffmpeg = ->
@@ -50,7 +50,7 @@ module.exports = (robot) ->
         msg.reply "[install check] ffmpeg is not installed. finished."
         return false
       else
-        retrun true
+        return true
   
   #対象のタイトルを取得し保存用のフルパス名を返す
   generate_filename = (url,savedir,extension) ->
