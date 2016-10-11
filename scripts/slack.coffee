@@ -16,8 +16,39 @@
 # Author:
 # None
 
+#モジュールロード
 child_process = require('child_process')
 
+#関数定義
+#youtube-dlインストールチェック
+isinstalled-youtube-dl = ->
+  child_process.exec "which youtube-dl", (error, stdout, stderr) ->
+    if stdout = ""
+      msg.reply "youtube-dl is not installed. finished."
+      return false
+    else
+      retrun true
+
+#ffmpegインストールチェック
+isinstalled-ffmpeg = ->
+  child_process.exec "which ffmpeg", (error, stdout, stderr) ->
+    if stdout = ""
+      msg.reply "[install check] ffmpeg is not installed. finished."
+      return false
+    else
+      retrun true
+
+#対象のタイトルを取得し保存用のフルパス名を返す
+generate_filename = (savedir,extension) ->
+  child_process.exec "youtube-dl --get-title #{url}", (error, stdout, stderr) ->
+    if !error
+      msg.reply "[generate filename] title fetch failed. message = #{error}"
+      return ""
+    else
+      savefilename = savedir + "/" + stdout + "." + extension
+      msg.reply "[generate filename] title fetch success. save filename = #{savefilename}"
+      return savefilename
+      
 module.exports = (robot) ->
   savemov = process.env.HUBOT_YOUTUBEDL_DIR
   savemp3 = process.env.HUBOT_YOUTUBEDL_DIR_MP3
@@ -31,36 +62,6 @@ module.exports = (robot) ->
   if savemp3 == ""
     msg.reply "ENV[HUBOT_YOUTUBEDL_DIR_MP3] is not set. use ENV[HUBOT_YOUTUBEDL_DIR] instead."
     savemp3 = savemov
-
-  #関数定義
-  #youtube-dlインストールチェック
-  isinstalled-youtube-dl = ->
-    child_process.exec "which youtube-dl", (error, stdout, stderr) ->
-      if stdout = ""
-        msg.reply "youtube-dl is not installed. finished."
-        return false
-      else
-        retrun true
-
-  #ffmpegインストールチェック
-  isinstalled-ffmpeg = ->
-    child_process.exec "which ffmpeg", (error, stdout, stderr) ->
-      if stdout = ""
-        msg.reply "[install check] ffmpeg is not installed. finished."
-        return false
-      else
-        retrun true
-
-  #対象のタイトルを取得し保存用のフルパス名を返す
-  generate_filename = (savedir,extension) ->
-    child_process.exec "youtube-dl --get-title #{url}", (error, stdout, stderr) ->
-      if !error
-        msg.reply "[generate filename] title fetch failed. message = #{error}"
-        return ""
-      else
-        savefilename = savedir + "/" + stdout + "." + extension
-        msg.reply "[generate filename] title fetch success. save filename = #{savefilename}"
-        return savefilename
 
   robot.respond /(save|conv) (start|test) (https.*?youtube\.com.*?)/i, (msg) ->
     savetype = msg.match[1]
