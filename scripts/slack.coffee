@@ -34,7 +34,7 @@ module.exports = (robot) ->
 
   #関数定義
   #youtube-dlインストールチェック
-  isinstalled-youtube-dl = () ->
+  isinstalled-youtube-dl = ->
     child_process.exec "which youtube-dl", (error, stdout, stderr) ->
       if stdout = ""
         msg.reply "youtube-dl is not installed. finished."
@@ -43,7 +43,7 @@ module.exports = (robot) ->
         retrun true
 
   #ffmpegインストールチェック
-  isinstalled-ffmpeg = () ->
+  isinstalled-ffmpeg = ->
     child_process.exec "which ffmpeg", (error, stdout, stderr) ->
       if stdout = ""
         msg.reply "[install check] ffmpeg is not installed. finished."
