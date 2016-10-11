@@ -38,7 +38,6 @@ module.exports = (robot) ->
   isinstalled_youtube_dl = ->
     child_process.exec "which youtube-dl", (error, stdout, stderr) ->
       if stdout == ""
-        msg.reply "youtube-dl is not installed. finished."
         return false
       else
         return true
@@ -47,13 +46,12 @@ module.exports = (robot) ->
   isinstalled_ffmpeg = ->
     child_process.exec "which ffmpeg", (error, stdout, stderr) ->
       if stdout == ""
-        msg.reply "[install check] ffmpeg is not installed. finished."
         return false
       else
         return true
   
   #対象のタイトルを取得し保存用のフルパス名を返す
-  generate_filename = (url,savedir,extension) ->
+  generate_filename = (msg,url,savedir,extension) ->
     child_process.exec "youtube-dl --get-title #{url}", (error, stdout, stderr) ->
       if !error
         msg.reply "[generate filename] title fetch failed. message = #{error}"
@@ -70,17 +68,19 @@ module.exports = (robot) ->
     
     #install check
     if !isinstalled_youtube_dl()
+      msg.reply "[install check] youtube-dl is not installed. finished."
       return
       
     if !isinstalled_ffmpeg()
+      msg.reply "[install check] ffmpeg is not installed. finished."
       return
 
     #generate title and set option
-    savefilename_mp4 = generate_filename(url,savemov,"mp4")
+    savefilename_mp4 = generate_filename(msg,url,savemov,"mp4")
     savefilename_mp3 = ""
     option = "--write-thumbnail"
     if savetype == "conv"
-      savefilename_mp3 = generate_filename(url,savemp3,"mp3")
+      savefilename_mp3 = generate_filename(msg,url,savemp3,"mp3")
       
     #simulation mode
     if mode == "test"
