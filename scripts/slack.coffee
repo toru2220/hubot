@@ -69,10 +69,10 @@ module.exports = (robot) ->
     url = msg.match[3]
     
     #install check
-    if !isinstalled-youtube-dl()
+    if !isinstalled_youtube_dl()
       return
       
-    if !isinstalled-ffmpeg()
+    if !isinstalled_ffmpeg()
       return
 
     #generate title and set option
